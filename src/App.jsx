@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React from "react";
 import { useState } from "react";
 
@@ -27,9 +28,15 @@ function App() {
   return (
     <div className="wrapper">
       <Nav />
-      <Home employees={employees} owners={owners} pets={pets} />
-      <StaffList employees={employees} />
-      <PetsList pets={pets} />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home employees={employees} owners={owners} pets={pets} />} />
+          <Route path="/staff" element={<StaffList employees={employees}/>}  />
+          <Route path="/pets" element={<PetsList pets={pets} />} > 
+          <Route path="/pets/:animal" element={<PetsList pets={pets} />}></Route>
+          </ Route > 
+        </Routes>
+      </Router>
       <Footer />
     </div>
   );
